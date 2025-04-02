@@ -65,11 +65,9 @@ With this quanitity, we can achieve our goal: **find the set of targets with hig
 
 $$
 t_\mathrm{best}(\sigma)
-\in \left\{
+\in \left[
     t\in[0,2\pi)\times[0,r_\mathrm{max}]=T
     \ |\ 
     S_\mathrm{avg}(t)=\max S(T,\sigma)
-\right\}
+\right]
 $$
-
-.
