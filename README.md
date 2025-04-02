@@ -1,7 +1,7 @@
 # Goal
 Find the "best" target $t$ (scoring highest points in Darts), depending on the aim.
 Definitions:
-- A **target** can be $t\in[0,2\pi)\times[0,R]$, with $R$ being the radius of the board (radial coordinates).
+- A **target** can be $t\in[0,2\pi)\times[0,r_\mathrm{max}]$, with $r_\mathrm{max}$ being the radius of the board (radial coordinates).
 - After targeting and throwing, a **hit** can be $h\in[0,2\pi)\times[0,\inf]\approx\mathbb{R}^2$.
 - The **score** of a hit is determined with:
 
@@ -66,7 +66,7 @@ With this quanitity, we can achieve our goal: **find the set of targets with hig
 $$
 t_\mathrm{best}(\sigma)
 \in \{
-    t\in[0,2\pi)\times[0,R]=T
+    t\in[0,2\pi)\times[0,r_\mathrm{max}]=T
     \ |\ 
     S_\mathrm{avg}(t)=\max S(T,\sigma)
 \}
