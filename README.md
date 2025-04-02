@@ -71,3 +71,26 @@ t_\mathrm{best}(\sigma)
     S_\mathrm{avg}(t)=\max S(T,\sigma)
 \right]
 $$
+
+# Code
+
+Several functions are needed:
+- `score_avg`
+    - `(tx, ty, sigma: 2x1 array) -> float`
+        - calculated via integration over integrand
+- `score_avg_integrand`
+    - `(hx, hy, tx, ty, sigma: 2x1 array) -> float`
+        - calculated via: `gauss(hx, tx, sigma[0])*gauss(h_y ,t_y, sigma[1])*score(hx, hy)`
+        - this will be integrated over `hx`and `hy`
+- `gaussian`
+    - `(h_x, t_x, sigma_x) -> float`
+- `calc_score`
+    - `(hx, hy) -> int`
+    - `calc_score_phi(h_phi: float) -> int`
+    - `calc_score_r(h_r: float) -> int`
+- `cart2pol(hx,hy) -> 2-tuple`
+    - will be later needed to convert the final optimal target to polar coordinates
+- `pol2cart(h_phi,h_rad) -> 2-tuple`
+
+
+
