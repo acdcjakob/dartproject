@@ -17,7 +17,7 @@ $$
 
 # Statistics
 If one had perfect aim, then one would always hit the targeted position: $t=h$.
-Therefore, to find the target with the best *expected* score, it's the same as finding the hit with the best score: $S(h_{opt})=\max_hS$.
+Therefore, to find the target with the best *expected* score, it's the same as finding the hit with the best score: $S(h_\mathrm{best})=\max_hS$.
 This is trivial: it's triple 20, aka *180*.
 
 **But**: most people do not have perfekt aim 🙂.
@@ -27,7 +27,7 @@ There are two ways of sucking in darts:
     - example: If you always hit 2cm below your targeted position, then you should (obviously) target 2cm above the triple 20 position.
 2. bad **precision**
     - precision is defined as the reproducibility of your results
-    - example: Even when hitting triple 20 "on average", a "spread" observed, when trying to hit the same position. There is always some distribution, and developing consistency is the key.
+    - example: Even when hitting triple 20 "on average", a "spread" is observed, when trying to hit the same position. There is always some distribution, and developing consistency is the key.
 
  Considering a fixed target, and different hits (=throwing multiple times), this study will assume the following:
  - perfect accuracy: the **mean** of hits equals the target position (no offset)
@@ -65,9 +65,9 @@ With this quanitity, we can achieve our goal: **find the set of targets with hig
 
 $$
 t_\mathrm{best}(\sigma)
-\in \{
+\in \left\{
     t\in[0,2\pi)\times[0,r_\mathrm{max}]=T
     \ |\ 
     S_\mathrm{avg}(t)=\max S(T,\sigma)
-\}
+\right\}
 $$
