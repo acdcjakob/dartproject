@@ -71,3 +71,5 @@ t_\mathrm{best}(\sigma)
     S_\mathrm{avg}(t)=\max S(T,\sigma)
 \right\}
 $$
+
+.
