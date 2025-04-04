@@ -7,9 +7,10 @@ def gaussian(h_i: float,t_i: float,sigma_i: float) -> float:
         else:
             return 0
     else:
-        return 1/(sigma_i*np.sqrt(2*np.pi))*np.exp(-(h_i-t_i)**2/sigma_i**2)
+        return 1/(sigma_i*np.sqrt(2*np.pi))*np.exp(-(h_i-t_i)**2/(2*sigma_i**2))
     
 def cart2pol(h_x: float, h_y: float) -> tuple:
+    # Output is in arctan2 style: -pi ... +pi
     h_r = np.sqrt(h_x**2 + h_y**2)
     h_phi = np.arctan2(h_y, h_x)
     return h_phi, h_r
