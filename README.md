@@ -75,7 +75,7 @@ $$
 # Code
 
 Several functions are needed:
-- `score_avg`
+- `score_avg` ❌
     - `(tx, ty, sigma: 2x1 array) -> float`
         - calculated via integration over integrand
 - `score_avg_integrand` ✅
@@ -92,5 +92,33 @@ Several functions are needed:
     - will be later needed to convert the final optimal target to polar coordinates
 - `pol2cart(h_phi,h_rad) -> 2-tuple` ✅
 
+## Integration
 
+Because of the difficulties coming with integrating a noncontinuous multi-dimensional function, use a Monte-Carlo-Integration approach.
+Name the integrand as:
 
+$$
+S_\mathrm{avg}(\dots)
+=\int\int
+s(\dots)
+\mathrm{d}h_x\mathrm{d}h_y
+$$
+$$
+s(h_x,h_y,t_x,t_x,\sigma)=
+\mathrm{gauss}(h_x,t_x,\sigma_x)
+\mathrm{gauss}(h_y,t_y,\sigma_y)
+S(h_x,h_y)
+$$
+
+In the simplest case, utilizing uniform sampling, one finds
+
+$$
+S_\mathrm{avg}
+= \frac{V}{N}\sum_i s(h_x^{(i)},h_y^{(i)},\dots)
+$$
+
+where $N$ values of $h_x$ and $h_y$ were sampled over the volume $V$.
+
+For implementation, we need:
+- `score_avg_mc`
+    - `(fh: callable, range: list) -> float`
