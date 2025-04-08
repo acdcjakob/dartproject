@@ -1,0 +1,8 @@
+[project]
+name = "dartproject"
+version = "0.1.0"
+description = "Calculates best target depending on accuracy"
+
+[build-system]
+requires = ["hatchling >= 1.26"]
+build-backend = "hatchling.build"
