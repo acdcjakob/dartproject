@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 
 from src.utils import cart2pol
 from src.utils import gaussian
+from src.utils import monte_carlo
 
 def test_cart2pol():
     h_x = 0
@@ -23,6 +24,10 @@ def test_gaussian():
     plt.plot(h_x,prb)
     plt.show()
 
+def test_monte_carlo():
+    foo = lambda x,y: np.sin(x+y) if x*y<=0 else np.exp(x-y)
+    N = 4000
 
-# test_cart2pol()
-test_gaussian()
+    return monte_carlo(foo,[[-1,1],[-1,1]],10000)
+
+print(test_monte_carlo())

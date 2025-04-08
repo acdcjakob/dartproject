@@ -19,3 +19,31 @@ def pol2cart(h_phi: float, h_r: float) -> tuple:
     h_x = h_r * np.cos(h_phi)
     h_y = h_r * np.sin(h_phi)
     return h_x, h_y
+
+def monte_carlo(fh, limits: list, N = 1000) -> float:
+    rng = np.random.default_rng()
+    samples = np.hstack([rng.uniform(limits[0][0],limits[0][1],(N,1)),
+                        rng.uniform(limits[1][0],limits[1][1],(N,1))])
+    
+    V = 1
+    for i in range(len(limits)):
+        V *= abs(limits[i][1]-limits[i][0])
+
+    summands = np.zeros((N,1))
+    for i in range(N):
+        summands[i] = fh(samples[i,0],samples[i,1])
+
+    if False:
+        import matplotlib.pyplot as plt
+        x = samples[:,0]
+        y = samples[:,1]
+        plt.scatter(x, y, c=summands[:, 0], cmap='viridis')
+        plt.colorbar(label='Summand Value')
+        plt.xlabel('x')
+        plt.ylabel('y')
+        plt.title('Monte Carlo Summands')
+        plt.axis('equal')
+        plt.show()
+    
+    tot = np.sum(summands)
+    return tot * V / N

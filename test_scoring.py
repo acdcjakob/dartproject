@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from src.scoring import calc_score_phi
 from src.scoring import calc_score
 from src.scoring import score_avg_integrand
+from src.findBest import score_avg
 
 def test_calc_score_phi():
     h_phi = np.linspace(-np.pi,np.pi,1000)
@@ -86,11 +87,7 @@ def test_score_avg_integrand_multiple():
     plt.legend()
     plt.show()
 
+def test_score_avg():
+    return score_avg(0,102,[0.1,0.1])
 
-# test_calc_score_phi()
-
-# test_calc_score(160)
-
-# test_score_avg_integrandX()
-
-test_score_avg_integrand_multiple()
+# print(test_score_avg())
