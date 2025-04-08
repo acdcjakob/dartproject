@@ -6,3 +6,7 @@ description = "Calculates best target depending on accuracy"
 [build-system]
 requires = ["hatchling >= 1.26"]
 build-backend = "hatchling.build"
+
+[tool.setuptools]
+packages = ["dartproject"]
+package-dir = {"" = "src"}
