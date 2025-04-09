@@ -7,8 +7,9 @@ def score_avg_integrand(h_x: float, h_y: float, t_x: float, t_y: float, sigma: n
 
 def calc_score(h_x: float, h_y: float) -> int:
     h_phi, h_r = cart2pol(h_x, h_y)
-    
-    return calc_score_phi(h_phi)*calc_score_r(h_r)[1]+calc_score_r(h_r)[0]
+    res = calc_score_phi(h_phi)*calc_score_r(h_r)[1]+calc_score_r(h_r)[0]
+    return res
+
 
 def calc_score_phi(h_phi: float) -> int:
     zone_score = np.array([

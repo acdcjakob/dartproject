@@ -16,19 +16,26 @@ def cart2pol(h_x: float, h_y: float) -> tuple:
     return h_phi, h_r
 
 def pol2cart(h_phi: float, h_r: float) -> tuple:
+    '''
+    Calculates the cartesian coordinates from polar coordinates (phi must be in radians)
+    '''
     h_x = h_r * np.cos(h_phi)
     h_y = h_r * np.sin(h_phi)
     return h_x, h_y
 
-def monte_carlo(fh, limits: list, N = 1000) -> float:
+def monte_carlo(fh, limits: list, N = 1000) -> tuple[float, np.ndarray]:
     rng = np.random.default_rng()
+
+    # Nx2 array of sampled positions
     samples = np.hstack([rng.uniform(limits[0][0],limits[0][1],(N,1)),
                         rng.uniform(limits[1][0],limits[1][1],(N,1))])
     
+    # Calculate the volume integrated over
     V = 1
     for i in range(len(limits)):
         V *= abs(limits[i][1]-limits[i][0])
 
+    # Evaluate the integral at all positions
     summands = np.zeros((N,1))
     for i in range(N):
         summands[i] = fh(samples[i,0],samples[i,1])
@@ -46,4 +53,7 @@ def monte_carlo(fh, limits: list, N = 1000) -> float:
         plt.show()
     
     tot = np.sum(summands)
-    return tot * V / N
+
+    integral = tot * V / N
+    information = np.hstack([samples,summands])
+    return (integral, information)

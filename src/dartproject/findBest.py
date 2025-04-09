@@ -12,8 +12,10 @@ def score_avg(t_x: float, t_y: float, sigma: np.ndarray) -> float:
 
     passToMonteCarlo = lambda h_x, h_y: score_avg_integrand(h_x,h_y,t_x,t_y,sigma)
 
-    lim_mult = 3
+    lim_mult = 6
+    sample_number = 1000000
+
     limits = [[t_x - lim_mult*sigma[0], t_x + lim_mult*sigma[0]],
               [t_y - lim_mult*sigma[1], t_y + lim_mult*sigma[1]]]
 
-    return monte_carlo(passToMonteCarlo,limits,5000)
+    return monte_carlo(passToMonteCarlo,limits,sample_number)[0]
