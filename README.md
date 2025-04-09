@@ -120,5 +120,32 @@ $$
 where $N$ values of $h_x$ and $h_y$ were sampled over the volume $V$.
 
 For implementation, we need:
-- `score_avg_mc`
-    - `(fh: callable, range: list) -> float`
+- `monte_carlo_uniform`
+    - `(fh: callable, range: list, N: int) -> float`
+    - ⚠️ this uniform sampling approach is not very efficient
+
+## Importance sampling
+
+The integration goes over large areas with integrand almost zero.
+A more efficient way would be to recognize that the weighted score function $s$ has a shape similar to a Gauss function (It was created this way!).
+Therefore, one can use _importance Monte-Carlo sampling_ of the weighted score function.
+This yields more data points at the "relevant" regimes near the gauss maximum.
+
+When we have a probability distribution function $D(h_x,h_y)$, we can use importance sampling by drawing $N$ samples from this distribution: $h^{(i)}=(h_x^{(i)},h_y^{(i)})$.
+Then one can evaluate the integrand divided by the distribution $N$ times and calculate the mean:
+$$
+I=\frac{1}{N}\sum_i\frac{s(h^{(i)})}{D(h^{(i)})}
+$$
+Because $s$ was defined by multiplying it with two 1D gauss functions, one can choose this weighting as $D$ and then the term cancels out and one has:
+$$
+I=\frac{1}{N}\sum_i s(h^{(i)})
+$$
+where $h^{(i)}$ are **not** picked uniformly, but according to
+$$
+D(h_x,h_y)=\mathrm{gauss}_x\cdot\mathrm{gauss}_y
+$$
+
+Then, `score_avg_integrand` is not needed, but a new function `monte_carlo_general` with inputs:
+- `fh: callable` the integrand function of which the integral will be calculated, divided by the PDF: this is in this case just `calc_score`
+- `samples` a Nx2 array of the sampled values
+
