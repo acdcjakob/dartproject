@@ -23,7 +23,7 @@ def pol2cart(h_phi: float, h_r: float) -> tuple:
     h_y = h_r * np.sin(h_phi)
     return h_x, h_y
 
-def monte_carlo(fh, limits: list, N = 1000) -> tuple[float, np.ndarray]:
+def monte_carlo_uniform(fh, limits: list, N = 1000) -> tuple[float, np.ndarray]:
     rng = np.random.default_rng()
 
     # Nx2 array of sampled positions
@@ -57,3 +57,13 @@ def monte_carlo(fh, limits: list, N = 1000) -> tuple[float, np.ndarray]:
     integral = tot * V / N
     information = np.hstack([samples,summands])
     return (integral, information)
+
+def monte_carlo_general(fh, samples: np.ndarray) -> float:
+    N = samples.shape[0]
+
+    # Evaluate the integral at all positions
+    summands = np.zeros((N,1))
+    for i in range(N):
+        summands[i] = fh(samples[i,0],samples[i,1])
+
+    return np.sum(summands) / N
