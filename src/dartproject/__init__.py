@@ -10,3 +10,4 @@ from .scoring import calc_score
 from .scoring import score_avg_integrand
 
 from .findBest import score_avg
+from .findBest import scan_dartboard
